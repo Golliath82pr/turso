@@ -1,57 +1,95 @@
 @database :memory:
 
-test log10-1000-integer-cast {
-    SELECT CAST(log10(1000) AS INTEGER)
+test log10-1000 {
+    SELECT log10(1000.0)
 }
 expect {
+    3.0
+}
+expect @js {
     3
 }
 
-test log10-1000-exact {
-    SELECT abs(log10(1000.0) - 3.0) < 1e-10
+test log10-100 {
+    SELECT log10(100.0)
 }
 expect {
+    2.0
+}
+expect @js {
+    2
+}
+
+test log10-10 {
+    SELECT log10(10.0)
+}
+expect {
+    1.0
+}
+expect @js {
     1
 }
 
-test log10-100-exact {
-    SELECT abs(log10(100.0) - 2.0) < 1e-10
+test log10-1000000 {
+    SELECT log10(1000000.0)
 }
 expect {
-    1
+    6.0
 }
-
-test log10-10-exact {
-    SELECT abs(log10(10.0) - 1.0) < 1e-10
-}
-expect {
-    1
-}
-
-test log10-1000000-integer-cast {
-    SELECT CAST(log10(1000000) AS INTEGER)
-}
-expect {
+expect @js {
     6
 }
 
-test log2-1024-integer-cast {
-    SELECT CAST(log2(1024) AS INTEGER)
+test log10-fractional {
+    SELECT log10(2.0)
 }
 expect {
+    0.301029995663981
+}
+
+test log10-negative-exponent {
+    SELECT log10(0.001)
+}
+expect {
+    -3.0
+}
+expect @js {
+    -3
+}
+
+test log2-1024 {
+    SELECT log2(1024.0)
+}
+expect {
+    10.0
+}
+expect @js {
     10
 }
 
-test log2-8-exact {
-    SELECT abs(log2(8.0) - 3.0) < 1e-10
+test log2-8 {
+    SELECT log2(8.0)
 }
 expect {
-    1
+    3.0
+}
+expect @js {
+    3
 }
 
-test log2-256-integer-cast {
-    SELECT CAST(log2(256) AS INTEGER)
+test log2-256 {
+    SELECT log2(256.0)
 }
 expect {
+    8.0
+}
+expect @js {
     8
+}
+
+test log2-fractional {
+    SELECT log2(3.0)
+}
+expect {
+    1.58496250072116
 }
